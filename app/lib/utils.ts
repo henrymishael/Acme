@@ -1,4 +1,5 @@
 import { Revenue } from './definitions';
+import { sql } from '@vercel/postgres';
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
