@@ -33,7 +33,7 @@ export default async function Page(
     return  (
         <div>
             <Suspense key={ query + currentPage}>
-                <CustomersTable customers={customers}/>
+                {/* <CustomersTable  /> */}
             </Suspense>
         </div>
       );
