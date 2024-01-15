@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 import CustomersTable from '@/app/ui/customers/table';
 import { customers } from '@/app/lib/placeholder-data';
-import { fetchCustomers } from '@/app/lib/data';
+import { fetchCustomers, fetchFilteredCustomers } from '@/app/lib/data';
 
 
 export const metadata: Metadata = {
@@ -25,16 +25,13 @@ export default async function Page(
     const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;   
 
-    const {
-        
-    } = await fetchCustomers();
+    const customers = await fetchFilteredCustomers(query);
     
 
     return  (
         <div>
-            <Suspense key={ query + currentPage}>
-                {/* <CustomersTable  /> */}
-            </Suspense>
+                <CustomersTable customers={customers}  />
+            
         </div>
       );
   }
