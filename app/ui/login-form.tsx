@@ -10,8 +10,14 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { useState } from 'react';
 
 export default function LoginForm() {
+  const [viewPassword, setViewPassword] = useState<boolean>(false)
+  const handlePasswordVisibility = () => {
+    setViewPassword((prevState) => !prevState);
+};
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
   return (
     <form action={dispatch} className="space-y-3">
@@ -33,7 +39,7 @@ export default function LoginForm() {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="Enter your email address"
+                placeholder="user@nextmail.com"
                 required
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -46,17 +52,20 @@ export default function LoginForm() {
             >
               Password
             </label>
-            <div className="relative">
+            <div className="relative flex flex-row items-center">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-none placeholder:text-gray-500"
                 id="password"
-                type="password"
+                type={viewPassword ? 'text' : 'password'}
                 name="password"
-                placeholder="Enter password"
+                placeholder="123456"
                 required
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <span className='absolute right-3'
+              onClick={handlePasswordVisibility} 
+              >{viewPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}</span>
             </div>
           </div>
         </div>

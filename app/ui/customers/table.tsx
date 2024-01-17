@@ -13,7 +13,7 @@ export default async function CustomersTable({
 }: {
   customers: FormattedCustomersTable[];
 }, ) {
-  const customer = await fetchCustomers()
+  // const customer = await fetchCustomers()
   return (
     <div className="w-full ">
       
